@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let timer = 0;
     let timerInterval = null;
     let isTimerStarted = false;
-    let clicks = 0;
+    let moves = 0;
 
     const timerDisplay = document.getElementById("timer");
     const gameContainer = document.querySelector('.game');
-    const clicksDisplay = document.getElementById("clicks");
+    const movesDisplay = document.getElementById("moves");
     const startTimer = () =>{
         if (!isTimerStarted) {
             isTimerStarted = true;
@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
         timerInterval = null;
     };
 
-    const updateClicks = () => {
-        clicks++;
-        clicksDisplay.textContent = clicks;
+    const updateMoves = () => {
+        moves++;
+        movesDisplay.textContent = moves;
     }
 
 
@@ -45,12 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // of adding and handling an event in Javascript.
         box.onclick=function() {
             startTimer();
-            updateClicks();
             this.classList.add('boxOpen')
             setTimeout(function(){
                 if(document.querySelectorAll('.boxOpen').length > 1){
                     if(document.querySelectorAll('.boxOpen')[0].innerHTML == 
                     document.querySelectorAll('.boxOpen')[1].innerHTML){
+
                         document.querySelectorAll('.boxOpen')[0].classList.add
                         ('boxMatch')
                         document.querySelectorAll('.boxOpen')[1].classList.add
@@ -81,9 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.querySelectorAll('.boxOpen')[0].classList.remove
                         ('boxOpen')
                 }
+
+                updateMoves();
             }
         }, 900)
         }
-        document.querySelector('.game').appendChild(box);
+        gameContainer.appendChild(box);
     }
 });
