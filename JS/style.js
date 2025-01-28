@@ -1,14 +1,16 @@
+// The arrow function () => {} is an ES6 feature. Arrow function provide a concise syntaz for defing functions.
 document.addEventListener('DOMContentLoaded', () => {
     const fruit = ["🍇", "🍉", "🍊", "🍋", "🍌", "🍍", "🍎", "🍏", "🍏", "🍎", "🍍", "🍌", "🍋", "🍊",  "🍉", "🍇"];
+// .sort() function with a callback is an example of a function programming concept called a "higher order function"    
     let shuffledFruit = fruit.sort(() => (Math.random() > 0.5) ? 2 : -1);
     let timer = 0;
     let timerInterval = null;
     let isTimerStarted = false;
-    let clicks = 0;
+    let moves = 0;
 
     const timerDisplay = document.getElementById("timer");
     const gameContainer = document.querySelector('.game');
-    const clicksDisplay = document.getElementById("clicks");
+    const movesDisplay = document.getElementById("moves");
     const startTimer = () =>{
         if (!isTimerStarted) {
             isTimerStarted = true;
@@ -23,25 +25,32 @@ document.addEventListener('DOMContentLoaded', () => {
         timerInterval = null;
     };
 
-    const updateClicks = () => {
-        clicks++;
-        clicksDisplay.textContent = clicks;
+    const updateMoves = () => {
+        moves++;
+        movesDisplay.textContent = moves;
     }
 
 
     for (let i=0; i<shuffledFruit.length; i++) {
+// This code dynamically creates <div> elements with the
+//  className of 'item' and populates them with the fruit
+//  emoji from the shuffledFruit array. These elements are
+//  then appended to the .game container in the DOM.        
         let box = document.createElement('div');
         box.className = 'item';
         box.innerHTML = shuffledFruit[i];
 
+// The onclick event is used here to trigger the startTimer and
+// updateClicks functions when a box is clicked. This example
+// of adding and handling an event in Javascript.
         box.onclick=function() {
             startTimer();
-            updateClicks();
             this.classList.add('boxOpen')
             setTimeout(function(){
                 if(document.querySelectorAll('.boxOpen').length > 1){
                     if(document.querySelectorAll('.boxOpen')[0].innerHTML == 
                     document.querySelectorAll('.boxOpen')[1].innerHTML){
+
                         document.querySelectorAll('.boxOpen')[0].classList.add
                         ('boxMatch')
                         document.querySelectorAll('.boxOpen')[1].classList.add
@@ -72,9 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.querySelectorAll('.boxOpen')[0].classList.remove
                         ('boxOpen')
                 }
+
+                updateMoves();
             }
         }, 900)
         }
-        document.querySelector('.game').appendChild(box);
+        gameContainer.appendChild(box);
     }
 });
