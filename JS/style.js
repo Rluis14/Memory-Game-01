@@ -1,5 +1,7 @@
+// The arrow function () => {} is an ES6 feature. Arrow function provide a concise syntaz for defing functions.
 document.addEventListener('DOMContentLoaded', () => {
     const fruit = ["🍇", "🍉", "🍊", "🍋", "🍌", "🍍", "🍎", "🍏", "🍏", "🍎", "🍍", "🍌", "🍋", "🍊",  "🍉", "🍇"];
+// .sort() function with a callback is an example of a function programming concept called a "higher order function"    
     let shuffledFruit = fruit.sort(() => (Math.random() > 0.5) ? 2 : -1);
     let timer = 0;
     let timerInterval = null;
@@ -30,10 +32,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     for (let i=0; i<shuffledFruit.length; i++) {
+// This code dynamically creates <div> elements with the
+//  className of 'item' and populates them with the fruit
+//  emoji from the shuffledFruit array. These elements are
+//  then appended to the .game container in the DOM.        
         let box = document.createElement('div');
         box.className = 'item';
         box.innerHTML = shuffledFruit[i];
 
+// The onclick event is used here to trigger the startTimer and
+// updateClicks functions when a box is clicked. This example
+// of adding and handling an event in Javascript.
         box.onclick=function() {
             startTimer();
             updateClicks();
